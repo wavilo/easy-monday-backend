@@ -11,7 +11,7 @@ const path            = require('path');
 const session         = require('express-session');
 const MongoStore      = require('connect-mongo')(session); 
 const passportSetup   = require('./passport/setup');
-
+const cors            = require('cors');
 
 mongoose.Promise = Promise;
 mongoose
@@ -46,6 +46,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+
+app.use(cors()); 
+
 app.use(session({ 
   secret: 'secret different for every app',
   saveUninitialized: true,
@@ -66,6 +69,9 @@ app.use('/', index);
 
 const authRouter = require('./routes/auth');
 app.use('/', authRouter);
+
+const commentRouter = require('./routes/comment-api-router');
+app.use('/api', commentRouter);
 
 // const processRouter = require('./routes/process');
 // app.use('/', processRouter);

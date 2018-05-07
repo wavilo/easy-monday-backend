@@ -17,22 +17,22 @@ const comments = [
     {
         comment:["blah", "blah"],
         week: 23,
-        user: "???"    
+        user: "5af0c47589f68cbb2cfd38fa"    
       },
     {
-        comment:["blah", "blah"],
+        comment:["blah2", "blah2"],
         week: 24,
-        user: "???"    
+        user: "5af0c47589f68cbb2cfd38fa"    
       },
     {
-        comment:["blah", "blah"],
+        comment:["blah3", "blah3"],
         week: 25,
-        user: "???"    
+        user: "5af0c47589f68cbb2cfd38fa"    
       },
     {
-        comment:["blah", "blah"],
+        comment:["blah4", "blah4"],
         week: 26,
-        user: "???"    
+        user: "5af0c47589f68cbb2cfd38fa"    
       }
 ];
 
