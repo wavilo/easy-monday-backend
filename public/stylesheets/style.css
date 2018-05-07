@@ -1,0 +1,17 @@
+body {
+  font-family: 'Tajawal', sans-serif;
+  padding: 10px; }
+
+.logo {
+  font-family: 'Amatic SC', cursive;
+  font-weight: bolder;
+  font-size: 23px; }
+
+.bg-light {
+  background-color: #81ecec; }
+
+hr {
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
+/*# sourceMappingURL=style.css.map */

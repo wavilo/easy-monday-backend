@@ -1,0 +1,57 @@
+<h2>Google Analytics</h2>
+
+
+<div id="embed-api-auth-container"></div>
+<div id="view-selector-container"></div>
+<div id="chart-container"></div>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <div class="col-sm">
+      <canvas id="myChart2" width="400" height="400"></canvas>
+    </div>
+  </div>
+</div>
+
+
+<hr>
+
+
+
+<form action="/process-comment" method="post">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Theme</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">Analytics</option>
+          <option value="2">Adwords</option>
+          <option value="3">Youtube</option>
+          <option value="4">Facebook</option>
+          <option value="5">Twitch</option>
+          <option value="6">Other</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text mb-3">Your comment</span>
+    </div>
+    <textarea class="form-control mb-3" aria-label="With textarea"></textarea>
+  </div>
+  <button class="btn btn-success" type="button">Save a Comment</button>
+</form>
+
+<button class="btn btn-primary" type="button">Add a Comment</button>
+
+<hr>
+
+
+
+<script src='/javascripts/ga-script.js'></script>
+
