@@ -6,14 +6,12 @@ const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     encryptedPassword: { type: String },
-    role: { 
-        type: String, 
-        enum: ["normal", "admin"],
-        default: "normal"
-    },
-    googleID: {type: String},
+    //googleID: {type: String},
 }, {
-    timestamps: true
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+        }
 });
 
 const User = mongoose.model('User', userSchema);

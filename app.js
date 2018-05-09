@@ -47,7 +47,11 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
-app.use(cors()); 
+
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:4200'] 
+})); 
 
 app.use(session({ 
   secret: 'secret different for every app',
@@ -68,7 +72,7 @@ const index = require('./routes/index');
 app.use('/', index);
 
 const authRouter = require('./routes/auth');
-app.use('/', authRouter);
+app.use('/api', authRouter);
 
 const commentRouter = require('./routes/comment-api-router');
 app.use('/api', commentRouter);

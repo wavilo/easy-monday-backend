@@ -15,12 +15,19 @@ console.error('Error connecting to mongo', err)
 
 const comments = [
     {
-        comment:["blah", "blah"],
+        comment:[
+            "Increase of traffic due to Facebook campaign", 
+            "Decrease of conversion - go look into the funnel",
+            "Very bad comments on the Video - go check with CM"
+        ],
         week: 23,
         user: "5af0c47589f68cbb2cfd38fa"    
       },
     {
-        comment:["blah2", "blah2"],
+        comment:[
+            "blah2", 
+            "blah2"
+        ],
         week: 24,
         user: "5af0c47589f68cbb2cfd38fa"    
       },
