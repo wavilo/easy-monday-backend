@@ -15,7 +15,7 @@ const cors            = require('cors');
 
 mongoose.Promise = Promise;
 mongoose
-  .connect(process.env.database_url, {useMongoClient: true})
+  .connect(process.env.MONGODB_URI, {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -81,3 +81,8 @@ app.use('/api', commentRouter);
 // app.use('/', processRouter);
 
 module.exports = app;
+
+// Send Angular's HTML for all other routes
+app.use((req, res, next) => {
+  res.sendFile(__dirname + '/public/index.html');
+})

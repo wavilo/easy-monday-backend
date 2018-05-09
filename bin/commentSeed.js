@@ -6,7 +6,7 @@ const Comment = require("../models/commentModel");
 
 mongoose.Promise = Promise;
 mongoose
-.connect(process.env.database_url, {useMongoClient: true})
+.connect(process.env.MONGODB_URI, {useMongoClient: true})
 .then(() => {
 console.log('Connected to Mongo!')
 }).catch(err => {
