@@ -25,19 +25,28 @@ const comments = [
       },
     {
         comment:[
-            "blah2", 
-            "blah2"
+            "Increase of traffic due to Adwords campaign", 
+            "Decrease of conversion - go look into the funnel",
+            "Very bad comments on the Video - go check with CM"
         ],
         week: 24,
         user: "5af0c47589f68cbb2cfd38fa"    
       },
     {
-        comment:["blah3", "blah3"],
+        comment:[
+            "Increase of traffic due to Adwords campaign", 
+            "Decrease of conversion - go look into the funnel",
+            "Very bad comments on the Video - go check with CM"
+        ],
         week: 25,
         user: "5af0c47589f68cbb2cfd38fa"    
       },
     {
-        comment:["blah4", "blah4"],
+        comment:[
+            "Increase of traffic due to Adwords campaign", 
+            "Decrease of conversion - go look into the funnel",
+            "Very bad comments on the Video - go check with CM"
+        ],
         week: 26,
         user: "5af0c47589f68cbb2cfd38fa"    
       }
