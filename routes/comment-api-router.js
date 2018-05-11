@@ -6,27 +6,38 @@ const Comment  = require('../models/commentModel');
 
 // POST   /api/comments
 router.post("/comments", (req, res, next) =>{
-  const { comment, week, user } = req.body;
-  Comment.create({ comment, week, user })
-    .then((newComment)=>{
-      res.json(newComment);
-    })
-    .catch((err)=>{
-      next(err);
-    })
-  //res.json(req.body);
+  const { comment, week } = req.body;
+  const user = req.user;
+
+  Comment.find({week: week}).then(comments => {
+    if (!comments.length) {
+      Comment.create({ comment, week, user })
+      .then((newComment)=>{
+        res.json(newComment);
+      })
+      .catch((err)=>{
+        next(err);
+      })
+    }
+    else {
+      const existingComment = comments[0]
+      Comment.update({_id: existingComment._id}, {$push: {comment: comment}}).then(() => {
+        res.json({message: "updated comment success!"})
+      })
+    }
+  })
+
+
 });
 
-//une fois avec les 2 lignes const {blah...} et res.json(req.body) on va sur postman pour voir si c'est connecté en faisant POST - localhost:3000/api/phones et en retrant dans Body et json(application).
-//si on voit c'est bon !!
-//on peut écrire le reste et voir que ça rentre dans mongoDB
 
-// GET    /api/phones
+// GET    
 router.get("/comments", (req, res, next)=>{
+  console.log(req.user);
   Comment
-    .find()
+    .find({user: req.user})
     .limit(20)
-    .sort({createdAt: -1}) //from newest to older
+    .sort({createdAt: -1})
     .then((comments)=>{
       res.json(comments);
     })
@@ -35,7 +46,7 @@ router.get("/comments", (req, res, next)=>{
     });
 });
 
-// GET    /api/phone/:phoneId
+// GET    
 router.get("/comment/:commentId", (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.commentId)){
     next(); //show 404
@@ -54,9 +65,9 @@ router.get("/comment/:commentId", (req, res, next) => {
     });
 });
 
-//dans postman on peut donc faire une get sur http://localhost:3000/api/phone/5af0105070c2c7929eeb91c3 et voir l'ID de ce téléphone qui est dans mongoDb
 
-// PUT    /api/phone/:phoneId
+
+// PUT    
 router.put("/comment/:commentId", (req, res, next)=>{
   if (!mongoose.Types.ObjectId.isValid(req.params.commentId)){
     next();//show 404
@@ -77,7 +88,7 @@ router.put("/comment/:commentId", (req, res, next)=>{
   });
 });
 
-// DELETE /api/phone/:phoneId
+// DELETE 
 router.delete("/comment/:commentId", (req, res, next)=>{
   if (!mongoose.Types.ObjectId.isValid(req.params.commentId)){
     next();//show 404

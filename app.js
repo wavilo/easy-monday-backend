@@ -67,6 +67,10 @@ passportSetup(app);
 app.locals.title = 'Easy Monday';
 
 
+app.use((req, res, next) => {
+  console.log("req.user", req.user)
+  next()
+})
 
 const index = require('./routes/index');
 app.use('/', index);
