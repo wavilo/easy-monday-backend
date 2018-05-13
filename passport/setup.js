@@ -10,11 +10,11 @@ passport.serializeUser((userDetails, done)=>{
 });
 
 passport.deserializeUser((idFromSession, done)=>{
-  console.log({idFromSession})
+  // console.log({idFromSession})
   console.log('deserialize (details from session)');
   User.findById(idFromSession) 
     .then((userDetails)=>{ 
-      console.log({userDetails})
+      // console.log({userDetails})
       done(null, userDetails); 
     })
     .catch((err)=>{

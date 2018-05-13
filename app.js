@@ -67,10 +67,10 @@ passportSetup(app);
 app.locals.title = 'Easy Monday';
 
 
-app.use((req, res, next) => {
-  console.log("req.user", req.user)
-  next()
-})
+// app.use((req, res, next) => {
+//   console.log("req.user", req.user)
+//   next()
+// })
 
 const index = require('./routes/index');
 app.use('/', index);
@@ -80,6 +80,9 @@ app.use('/api', authRouter);
 
 const commentRouter = require('./routes/comment-api-router');
 app.use('/api', commentRouter);
+
+// const youtubeRouter = require('./routes/youtube-api');
+// app.use('/api', youtubeRouter);
 
 // const processRouter = require('./routes/process');
 // app.use('/', processRouter);

@@ -33,7 +33,7 @@ router.post("/comments", (req, res, next) =>{
 
 // GET    
 router.get("/comments", (req, res, next)=>{
-  console.log(req.user);
+  // console.log(req.user);
   Comment
     .find({user: req.user})
     .limit(20)
