@@ -6,7 +6,6 @@ const userSchema = new Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     encryptedPassword: { type: String },
-    //googleID: {type: String},
 }, {
     timestamps: {
         createdAt: 'created_at',

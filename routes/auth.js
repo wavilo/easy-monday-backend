@@ -107,21 +107,6 @@ router.get("/checklogin", (req, res, next) => {
 
 
 
-//google route
-// router.get("/google/login",
-//   passport.authenticate("google", {
-//     scope: [
-//       "https://www.googleapis.com/auth/plus.login",
-//       "https://www.googleapis.com/auth/plus.profile.emails.read"
-//     ]
-//   }));
-
-// router.get("/google/success", 
-//   passport.authenticate("google", {
-//     successRedirect: "/",
-//     failureRedirect: "/login",
-//   }));
-
 
   
 

@@ -2,7 +2,7 @@ const passport = require("passport");
 const User = require("../models/userModel");
 
 
-require("./google-strategy");
+
 
 passport.serializeUser((userDetails, done)=>{
   console.log('serialize (save to session)');
