@@ -45,6 +45,23 @@ var dataChart1 = new gapi.analytics.googleCharts.DataChart({
   }
 });
 
+var dataChartSessions = new gapi.analytics.googleCharts.DataChart({
+  query: {
+    metrics: 'ga:sessions',
+    dimensions: 'ga:date',
+    'start-date': '14daysAgo',
+    'end-date': '7daysAgo',
+  },
+
+  chart: {
+    container: 'chart-sessions-container',
+    type: 'LINE',
+    options: {
+      width: '100%'
+    }
+  }
+});
+
 
 var dataChart2 = new gapi.analytics.googleCharts.DataChart({
   query: {
@@ -57,6 +74,25 @@ var dataChart2 = new gapi.analytics.googleCharts.DataChart({
   },
   chart: {
     container: 'chart-2-container',
+    type: 'PIE',
+    options: {
+      width: '100%',
+      pieHole: 4/9
+    }
+  }
+});
+
+var dataChartCountry = new gapi.analytics.googleCharts.DataChart({
+  query: {
+    metrics: 'ga:sessions',
+    dimensions: 'ga:country',
+    'start-date': '14daysAgo',
+    'end-date': '7daysAgo',
+    'max-results': 6,
+    sort: '-ga:sessions'
+  },
+  chart: {
+    container: 'chart-country-container',
     type: 'PIE',
     options: {
       width: '100%',
@@ -83,6 +119,24 @@ var dataChart3 = new gapi.analytics.googleCharts.DataChart({
   }
 });
 
+var dataChartSource = new gapi.analytics.googleCharts.DataChart({
+  query: {
+    'dimensions': 'ga:source',
+    'metrics': 'ga:sessions',
+    'start-date': '14daysAgo',
+    'end-date': '7daysAgo',
+    'sort': '-ga:sessions',
+    'max-results': '6'
+  },
+  chart: {
+    type: 'TABLE',
+    container: 'chart-source-container',
+    options: {
+      width: '100%'
+    }
+  }
+});
+
 var dataChart4 = new gapi.analytics.googleCharts.DataChart({
   query: {
     'dimensions': 'ga:pagePath',
@@ -101,6 +155,24 @@ var dataChart4 = new gapi.analytics.googleCharts.DataChart({
   }
 });
 
+var dataChartPage = new gapi.analytics.googleCharts.DataChart({
+  query: {
+    'dimensions': 'ga:pagePath',
+    'metrics': 'ga:pageviews',
+    'start-date': '14daysAgo',
+    'end-date': '7daysAgo',
+    'sort': '-ga:pageviews',
+    'max-results': '6'
+  },
+  chart: {
+    type: 'TABLE',
+    container: 'chart-page-container',
+    options: {
+      width: '100%'
+    }
+  }
+});
+
 
 
 
@@ -111,9 +183,6 @@ viewSelector1.on('change', function(ids) {
   dataChart1.set({query: {ids: ids}}).execute();
 });
 
-/**
- * Update the second dataChart when the second view selecter is changed.
- */
 viewSelector1.on('change', function(ids) {
   dataChart2.set({query: {ids: ids}}).execute();
 });
@@ -126,7 +195,21 @@ viewSelector1.on('change', function(ids) {
   dataChart4.set({query: {ids: ids}}).execute();
 });
 
+viewSelector1.on('change', function(ids) {
+  dataChartSessions.set({query: {ids: ids}}).execute();
+});
 
+viewSelector1.on('change', function(ids) {
+  dataChartCountry.set({query: {ids: ids}}).execute();
+});
+
+viewSelector1.on('change', function(ids) {
+  dataChartSource.set({query: {ids: ids}}).execute();
+});
+
+viewSelector1.on('change', function(ids) {
+  dataChartPage.set({query: {ids: ids}}).execute();
+});
 
 
 
