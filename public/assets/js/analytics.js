@@ -119,6 +119,25 @@ var dataChart3 = new gapi.analytics.googleCharts.DataChart({
   }
 });
 
+//timeline chart
+var breakdownChart = new gapi.analytics.googleCharts.DataChart({
+  query: {
+    'dimensions': 'ga:date',
+    'metrics': 'ga:sessions',
+    'start-date': '7daysAgo',
+    'end-date': 'yesterday'
+  },
+  chart: {
+    type: 'LINE',
+    container: 'breakdown-chart-container',
+    options: {
+      width: '100%'
+    }
+  }
+});
+var mainChartRowClickListener;
+
+
 var dataChartSource = new gapi.analytics.googleCharts.DataChart({
   query: {
     'dimensions': 'ga:source',
@@ -136,6 +155,25 @@ var dataChartSource = new gapi.analytics.googleCharts.DataChart({
     }
   }
 });
+
+var breakdownChart2 = new gapi.analytics.googleCharts.DataChart({
+  query: {
+    'dimensions': 'ga:date',
+    'metrics': 'ga:sessions',
+    'start-date': '14daysAgo',
+    'end-date': '7daysAgo'
+  },
+  chart: {
+    type: 'LINE',
+    container: 'breakdown-chart-container-2',
+    options: {
+      width: '100%'
+    }
+  }
+});
+var mainChartRowClickListener2;
+
+
 
 var dataChart4 = new gapi.analytics.googleCharts.DataChart({
   query: {
@@ -187,9 +225,9 @@ viewSelector1.on('change', function(ids) {
   dataChart2.set({query: {ids: ids}}).execute();
 });
 
-viewSelector1.on('change', function(ids) {
-  dataChart3.set({query: {ids: ids}}).execute();
-});
+// viewSelector1.on('change', function(ids) {
+//   dataChart3.set({query: {ids: ids}}).execute();
+// });
 
 viewSelector1.on('change', function(ids) {
   dataChart4.set({query: {ids: ids}}).execute();
@@ -203,14 +241,119 @@ viewSelector1.on('change', function(ids) {
   dataChartCountry.set({query: {ids: ids}}).execute();
 });
 
-viewSelector1.on('change', function(ids) {
-  dataChartSource.set({query: {ids: ids}}).execute();
-});
+// viewSelector1.on('change', function(ids) {
+//   dataChartSource.set({query: {ids: ids}}).execute();
+// });
 
 viewSelector1.on('change', function(ids) {
   dataChartPage.set({query: {ids: ids}}).execute();
 });
 
+//new viewSelector
+viewSelector1.on('change', function(ids) {
+  var options = {query: {ids: ids}};
+
+  // Clean up any event listeners registered on the main chart before
+  // rendering a new one.
+  if (mainChartRowClickListener) {
+    google.visualization.events.removeListener(mainChartRowClickListener);
+  }
+
+  dataChart3.set(options).execute();
+  breakdownChart.set(options);
+
+  // Only render the breakdown chart if a browser filter has been set.
+  if (breakdownChart.get().query.filters) breakdownChart.execute();
+});
+
+
+/**
+ * Each time the main chart is rendered, add an event listener to it so
+ * that when the user clicks on a row, the line chart is updated with
+ * the data from the browser in the clicked row.
+ */
+dataChart3.on('success', function(response) {
+
+  var chart = response.chart;
+  var dataTable = response.dataTable;
+
+  // Store a reference to this listener so it can be cleaned up later.
+  mainChartRowClickListener = google.visualization.events
+      .addListener(chart, 'select', function(event) {
+
+    // When you unselect a row, the "select" event still fires
+    // but the selection is empty. Ignore that case.
+    if (!chart.getSelection().length) return;
+
+    var row =  chart.getSelection()[0].row;
+    var browser =  dataTable.getValue(row, 0);
+    var options = {
+      query: {
+        filters: 'ga:source==' + browser
+      },
+      chart: {
+        options: {
+          title: browser
+        }
+      }
+    };
+
+    breakdownChart.set(options).execute();
+  });
+});
+
+
+viewSelector1.on('change', function(ids) {
+  var options = {query: {ids: ids}};
+
+  // Clean up any event listeners registered on the main chart before
+  // rendering a new one.
+  if (mainChartRowClickListener2) {
+    google.visualization.events.removeListener(mainChartRowClickListener2);
+  }
+
+  dataChartSource.set(options).execute();
+  breakdownChart2.set(options);
+
+  // Only render the breakdown chart if a browser filter has been set.
+  if (breakdownChart2.get().query.filters) breakdownChart2.execute();
+});
+
+
+/**
+ * Each time the main chart is rendered, add an event listener to it so
+ * that when the user clicks on a row, the line chart is updated with
+ * the data from the browser in the clicked row.
+ */
+dataChartSource.on('success', function(response) {
+
+  var chart = response.chart;
+  var dataTable = response.dataTable;
+
+  // Store a reference to this listener so it can be cleaned up later.
+  mainChartRowClickListener2 = google.visualization.events
+      .addListener(chart, 'select', function(event) {
+
+    // When you unselect a row, the "select" event still fires
+    // but the selection is empty. Ignore that case.
+    if (!chart.getSelection().length) return;
+
+    var row =  chart.getSelection()[0].row;
+    var browser =  dataTable.getValue(row, 0);
+    var options = {
+      query: {
+        filters: 'ga:source==' + browser
+      },
+      chart: {
+        options: {
+          title: browser
+        }
+      }
+    };
+
+    breakdownChart2.set(options).execute();
+  });
+});
 
 
 });
