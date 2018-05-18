@@ -15,7 +15,7 @@ console.error('Error connecting to mongo', err)
 
 const users = [
     {
-        name: "JeanBlah", 
+        name: "JeanBla", 
         email: "Jean-blah@blah.org",
         encryptedPassword: "$2a$10$g.Ssyh1SyO244CU701K/lOkAHoIdMs3TP.g7kgARGuh15uZMn2PUi",
         role: "normal"
